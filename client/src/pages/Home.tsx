@@ -186,16 +186,15 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="space-y-12">
             {transformations.map((transformation, idx) => (
               <div
                 key={idx}
-                className="group bg-card rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+                className="group bg-card rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-500"
               >
-                {/* Before/After Images Container */}
-                <div className="relative h-96 overflow-hidden bg-secondary/50">
+                <div className="grid md:grid-cols-2 gap-0">
                   {/* Before Image */}
-                  <div className="absolute inset-0 w-1/2 h-full overflow-hidden">
+                  <div className="relative h-96 overflow-hidden bg-secondary/50">
                     <img
                       src={transformation.before}
                       alt="Before"
@@ -207,7 +206,7 @@ export default function Home() {
                   </div>
 
                   {/* After Image */}
-                  <div className="absolute inset-0 w-1/2 h-full right-0 overflow-hidden">
+                  <div className="relative h-96 overflow-hidden bg-secondary/50">
                     <img
                       src={transformation.after}
                       alt="After"
@@ -217,24 +216,21 @@ export default function Home() {
                       AFTER
                     </div>
                   </div>
-
-                  {/* Center Divider */}
-                  <div className="absolute inset-y-0 left-1/2 w-1 bg-accent/50 group-hover:bg-accent transition-colors duration-300"></div>
                 </div>
 
                 {/* Info Section */}
-                <div className="p-6 text-center">
-                  <h3 style={{ fontFamily: '"Playfair Display", serif', fontWeight: 700 }} className="text-xl mb-2">
+                <div className="p-8 text-center">
+                  <h3 style={{ fontFamily: '"Playfair Display", serif', fontWeight: 700 }} className="text-2xl mb-4">
                     {transformation.name}
                   </h3>
-                  <div className="flex justify-center gap-4 text-sm">
+                  <div className="flex justify-center gap-8 text-sm">
                     <div>
-                      <p className="text-accent font-semibold">{transformation.duration}</p>
+                      <p className="text-accent font-semibold text-lg">{transformation.duration}</p>
                       <p className="text-muted-foreground text-xs">Duration</p>
                     </div>
                     <div className="w-px bg-border"></div>
                     <div>
-                      <p className="text-accent font-semibold">{transformation.weight}</p>
+                      <p className="text-accent font-semibold text-lg">{transformation.weight}</p>
                       <p className="text-muted-foreground text-xs">Result</p>
                     </div>
                   </div>
