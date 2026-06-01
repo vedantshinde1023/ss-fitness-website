@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 interface BeforeAfterSliderProps {
   beforeImage: string;
@@ -13,8 +13,8 @@ export default function BeforeAfterSlider({
   beforeLabel = 'Before',
   afterLabel = 'After',
 }: BeforeAfterSliderProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
   const [sliderPosition, setSliderPosition] = useState(50);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
 
   const handleMouseDown = () => {
@@ -32,48 +32,29 @@ export default function BeforeAfterSlider({
     const x = e.clientX - rect.left;
     const percentage = (x / rect.width) * 100;
 
-    setSliderPosition(Math.max(0, Math.min(100, percentage)));
-  };
-
-  const handleTouchStart = () => {
-    setIsDragging(true);
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (!isDragging || !containerRef.current) return;
-
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = e.touches[0].clientX - rect.left;
-    const percentage = (x / rect.width) * 100;
-
-    setSliderPosition(Math.max(0, Math.min(100, percentage)));
+    if (percentage >= 0 && percentage <= 100) {
+      setSliderPosition(percentage);
+    }
   };
 
   useEffect(() => {
-    if (isDragging) {
-      document.addEventListener('mouseup', handleMouseUp);
-      document.addEventListener('mousemove', handleMouseMove as any);
-      return () => {
-        document.removeEventListener('mouseup', handleMouseUp);
-        document.removeEventListener('mousemove', handleMouseMove as any);
-      };
-    }
-  }, [isDragging]);
+    const handleGlobalMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    window.addEventListener('mouseup', handleGlobalMouseUp);
+    return () => window.removeEventListener('mouseup', handleGlobalMouseUp);
+  }, []);
 
   return (
     <div
       ref={containerRef}
-      className="relative w-full max-w-4xl mx-auto aspect-video overflow-hidden rounded-lg cursor-col-resize select-none group"
+      className="relative w-full max-w-2xl mx-auto overflow-hidden rounded-lg cursor-col-resize select-none"
       onMouseMove={handleMouseMove}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-      onTouchMove={handleTouchMove}
+      onMouseLeave={handleMouseUp}
+      style={{ aspectRatio: '16 / 9' }}
     >
       {/* After Image (Background) */}
       <img
@@ -97,30 +78,34 @@ export default function BeforeAfterSlider({
         />
       </div>
 
-      {/* Vertical Handle */}
+      {/* Slider Handle */}
       <div
-        className="absolute top-0 bottom-0 w-1 bg-accent transition-all duration-75"
-        style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
+        className="absolute top-0 bottom-0 w-1 bg-accent cursor-col-resize transition-all"
+        style={{
+          left: `${sliderPosition}%`,
+          boxShadow: '0 0 20px rgba(255, 223, 0, 0.6)',
+        }}
       >
         {/* Handle Circle */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-accent rounded-full shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-accent rounded-full flex items-center justify-center shadow-lg">
           <div className="flex gap-1">
             <svg className="w-4 h-4 text-background" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M8.5 3a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM8.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM8.5 15a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+              <path d="M10.5 1.5a1 1 0 11-2 0 1 1 0 012 0zM10.5 8.5a1 1 0 11-2 0 1 1 0 012 0zM10.5 15.5a1 1 0 11-2 0 1 1 0 012 0z" />
             </svg>
             <svg className="w-4 h-4 text-background" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M11.5 3a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM11.5 9a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM11.5 15a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+              <path d="M10.5 1.5a1 1 0 11-2 0 1 1 0 012 0zM10.5 8.5a1 1 0 11-2 0 1 1 0 012 0zM10.5 15.5a1 1 0 11-2 0 1 1 0 012 0z" />
             </svg>
           </div>
         </div>
       </div>
 
       {/* Labels */}
-      <div className="absolute top-4 left-4 text-white font-semibold text-sm md:text-base drop-shadow-lg">
-        {beforeLabel}
+      <div className="absolute top-4 left-4 bg-background/80 backdrop-blur px-4 py-2 rounded-lg">
+        <p className="text-accent font-semibold text-sm">{beforeLabel}</p>
       </div>
-      <div className="absolute top-4 right-4 text-white font-semibold text-sm md:text-base drop-shadow-lg">
-        {afterLabel}
+
+      <div className="absolute top-4 right-4 bg-background/80 backdrop-blur px-4 py-2 rounded-lg">
+        <p className="text-accent font-semibold text-sm">{afterLabel}</p>
       </div>
     </div>
   );

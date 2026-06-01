@@ -21,11 +21,37 @@ export default function Home() {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission - could integrate with backend or email service
     console.log('Form submitted:', formData);
     alert('Thank you for your interest! We will contact you soon.');
     setFormData({ name: '', email: '', phone: '', message: '' });
   };
+
+  const services = [
+    {
+      icon: Dumbbell,
+      title: 'Strength Training',
+      description: 'Advanced equipment and programs for muscle building and strength development',
+      image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/strength-training-service-VGugjj27JhvF3zui86Nx5u.webp',
+    },
+    {
+      icon: Zap,
+      title: 'Cardio & Conditioning',
+      description: 'High-intensity cardio workouts to boost endurance and burn calories',
+      image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/cardio-conditioning-service-TqNJGYNGqELZX8ksxK2qVK.webp',
+    },
+    {
+      icon: Users,
+      title: 'Personal Training',
+      description: 'One-on-one coaching with certified trainers tailored to your goals',
+      image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/personal-training-service-S3rmxPY63iNzTeohkWVP6M.webp',
+    },
+    {
+      icon: Award,
+      title: 'Group Classes',
+      description: 'Yoga, Zumba, and other group fitness classes for all levels',
+      image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/group-classes-service-Qx8zR2V9evxkJzCmZLuQvp.webp',
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -90,39 +116,33 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                icon: Dumbbell,
-                title: 'Strength Training',
-                description: 'Advanced equipment and programs for muscle building and strength development',
-              },
-              {
-                icon: Zap,
-                title: 'Cardio & Conditioning',
-                description: 'High-intensity cardio workouts to boost endurance and burn calories',
-              },
-              {
-                icon: Users,
-                title: 'Personal Training',
-                description: 'One-on-one coaching with certified trainers tailored to your goals',
-              },
-              {
-                icon: Award,
-                title: 'Group Classes',
-                description: 'Yoga, Zumba, and other group fitness classes for all levels',
-              },
-            ].map((service, idx) => {
+            {services.map((service, idx) => {
               const Icon = service.icon;
               return (
                 <div
                   key={idx}
-                  className="p-8 bg-card rounded-lg hover:bg-card/80 transition-all duration-300 group cursor-pointer hover:scale-105"
+                  className="group relative overflow-hidden rounded-lg h-96 cursor-pointer"
                 >
-                  <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/40 transition-colors">
-                    <Icon className="w-6 h-6 text-accent" />
+                  {/* Background Image */}
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent group-hover:from-background/80 group-hover:via-background/50 transition-all duration-300"></div>
+                  
+                  {/* Content */}
+                  <div className="absolute inset-0 p-6 flex flex-col justify-end">
+                    <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/40 transition-colors">
+                      <Icon className="w-6 h-6 text-accent" />
+                    </div>
+                    <h3 className="h3 text-lg mb-2 text-white">{service.title}</h3>
+                    <p className="text-muted-foreground text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      {service.description}
+                    </p>
                   </div>
-                  <h3 className="h3 text-lg mb-3">{service.title}</h3>
-                  <p className="text-muted-foreground text-sm">{service.description}</p>
                 </div>
               );
             })}
@@ -145,8 +165,8 @@ export default function Home() {
 
           <div className="flex justify-center">
             <BeforeAfterSlider
-              beforeImage="https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-before-after-concept-bkRwc2CDJoZMtAG7qSa8oZ.webp"
-              afterImage="https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-before-after-concept-bkRwc2CDJoZMtAG7qSa8oZ.webp"
+              beforeImage="https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-before-overweight-juEeXAfCizjG8nVFEW399L.webp"
+              afterImage="https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-before-fit-man-PS6CUBwcoh5ZYESoKfvvZ7.webp"
               beforeLabel="Before"
               afterLabel="After"
             />
@@ -249,23 +269,23 @@ export default function Home() {
                 <h2 className="h2 mb-4">About SS Fitness</h2>
               </div>
               <p className="text-muted-foreground leading-relaxed">
-                SS Fitness is Handewadi's premier fitness destination, dedicated to helping individuals achieve their transformation goals. With state-of-the-art equipment, certified trainers, and a supportive community, we create an environment where fitness enthusiasts of all levels can thrive.
+                SS Fitness is a premium fitness center located in Handewadi, dedicated to transforming lives through fitness. With state-of-the-art equipment, expert trainers, and a supportive community, we provide the perfect environment for your fitness journey.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Our commitment to cleanliness, safety, and excellence has made us the trusted choice for hundreds of members seeking real results and lasting lifestyle changes.
+                Whether you're a beginner or an advanced athlete, our comprehensive programs and personalized coaching ensure you achieve your fitness goals while enjoying the process.
               </p>
-              <div className="pt-4 space-y-3">
-                <div className="flex items-center gap-3">
-                  <Award className="w-5 h-5 text-accent flex-shrink-0" />
-                  <span>Modern, well-maintained equipment</span>
+              <div className="flex gap-6 pt-4">
+                <div>
+                  <p className="text-3xl font-bold text-accent">500+</p>
+                  <p className="text-sm text-muted-foreground">Active Members</p>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Users className="w-5 h-5 text-accent flex-shrink-0" />
-                  <span>Expert trainers and supportive community</span>
+                <div>
+                  <p className="text-3xl font-bold text-accent">15+</p>
+                  <p className="text-sm text-muted-foreground">Expert Trainers</p>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Zap className="w-5 h-5 text-accent flex-shrink-0" />
-                  <span>Diverse class schedule for all fitness levels</span>
+                <div>
+                  <p className="text-3xl font-bold text-accent">1000+</p>
+                  <p className="text-sm text-muted-foreground">Transformations</p>
                 </div>
               </div>
             </div>
@@ -273,134 +293,155 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact & Hours Section */}
+      {/* Contact Section */}
       <section id="contact" className="section-spacing bg-secondary/30">
         <div className="container">
+          <div className="text-center mb-12">
+            <div className="flex justify-center mb-4">
+              <div className="divider-gold"></div>
+            </div>
+            <h2 className="h2 mb-4">Get In Touch</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Ready to start your transformation? Contact us today or visit our gym in Handewadi
+            </p>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <div>
-              <div className="mb-8">
-                <div className="divider-gold mb-4"></div>
-                <h2 className="h2 mb-2">Get Started Today</h2>
-                <p className="text-muted-foreground">Fill out the form and our team will contact you shortly</p>
-              </div>
-
-              <form onSubmit={handleFormSubmit} className="space-y-4">
-                <div>
-                  <Input
-                    type="text"
-                    name="name"
-                    placeholder="Your Name"
-                    value={formData.name}
-                    onChange={handleFormChange}
-                    required
-                    className="bg-card border-border text-foreground placeholder:text-muted-foreground"
-                  />
-                </div>
-                <div>
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder="Email Address"
-                    value={formData.email}
-                    onChange={handleFormChange}
-                    required
-                    className="bg-card border-border text-foreground placeholder:text-muted-foreground"
-                  />
-                </div>
-                <div>
-                  <Input
-                    type="tel"
-                    name="phone"
-                    placeholder="Phone Number"
-                    value={formData.phone}
-                    onChange={handleFormChange}
-                    className="bg-card border-border text-foreground placeholder:text-muted-foreground"
-                  />
-                </div>
-                <div>
-                  <Textarea
-                    name="message"
-                    placeholder="Tell us about your fitness goals..."
-                    value={formData.message}
-                    onChange={handleFormChange}
-                    rows={4}
-                    className="bg-card border-border text-foreground placeholder:text-muted-foreground"
-                  />
-                </div>
-                <Button type="submit" className="btn-primary w-full">
-                  Send Inquiry
-                </Button>
-              </form>
-            </div>
-
-            {/* Info & Hours */}
+            {/* Contact Info */}
             <div className="space-y-8">
-              <div>
-                <div className="divider-gold mb-4"></div>
-                <h2 className="h2 mb-6">Visit Us</h2>
-              </div>
-
-              {/* Address */}
               <div className="flex gap-4">
-                <MapPin className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+                <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-6 h-6 text-accent" />
+                </div>
                 <div>
-                  <h3 className="font-semibold mb-2">Location</h3>
-                  <p className="text-muted-foreground">
-                    Autadwadi Handewadi<br />
-                    Handewadi, Pune<br />
-                    Maharashtra 412308
-                  </p>
+                  <h3 className="font-semibold mb-1">Location</h3>
+                  <p className="text-muted-foreground">Handewadi, Pune, Maharashtra</p>
                 </div>
               </div>
 
-              {/* Hours */}
               <div className="flex gap-4">
-                <Clock className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+                <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Phone className="w-6 h-6 text-accent" />
+                </div>
                 <div>
-                  <h3 className="font-semibold mb-3">Hours</h3>
-                  <div className="space-y-1 text-sm text-muted-foreground">
-                    <p><span className="font-medium text-foreground">Monday - Saturday:</span> 6:00 AM - 10:00 PM</p>
-                    <p><span className="font-medium text-foreground">Tuesday - Wednesday:</span> 6:00 AM - 10:00 PM</p>
-                    <p><span className="font-medium text-foreground">Sunday:</span> Closed</p>
-                  </div>
+                  <h3 className="font-semibold mb-1">Phone</h3>
+                  <p className="text-muted-foreground">+91 (Your Phone Number)</p>
                 </div>
               </div>
 
-              {/* Contact Info */}
               <div className="flex gap-4">
-                <Phone className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+                <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-6 h-6 text-accent" />
+                </div>
                 <div>
-                  <h3 className="font-semibold mb-2">Contact</h3>
-                  <p className="text-muted-foreground">Call or WhatsApp us for more information</p>
+                  <h3 className="font-semibold mb-1">Email</h3>
+                  <p className="text-muted-foreground">info@ssfitness.com</p>
                 </div>
               </div>
 
-              {/* Social */}
               <div className="flex gap-4">
-                <Mail className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+                <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Clock className="w-6 h-6 text-accent" />
+                </div>
                 <div>
-                  <h3 className="font-semibold mb-2">Follow Us</h3>
-                  <p className="text-muted-foreground">
-                    Instagram: <a href="https://instagram.com/ss.fitness_club" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">@ss.fitness_club</a>
-                  </p>
+                  <h3 className="font-semibold mb-1">Hours</h3>
+                  <p className="text-muted-foreground">Mon - Sun: 6:00 AM - 10:00 PM</p>
                 </div>
               </div>
             </div>
+
+            {/* Contact Form */}
+            <form onSubmit={handleFormSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium mb-2">Name</label>
+                <Input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleFormChange}
+                  placeholder="Your name"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2">Email</label>
+                <Input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleFormChange}
+                  placeholder="your@email.com"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2">Phone</label>
+                <Input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleFormChange}
+                  placeholder="+91 XXXXX XXXXX"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2">Message</label>
+                <Textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleFormChange}
+                  placeholder="Tell us about your fitness goals..."
+                  rows={4}
+                  required
+                />
+              </div>
+
+              <Button type="submit" className="btn-primary w-full">
+                Send Message
+              </Button>
+            </form>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-secondary border-t border-border py-8">
+      <footer className="bg-secondary/50 border-t border-border py-12">
         <div className="container">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-muted-foreground text-sm">
-              © 2026 SS Fitness. All rights reserved.
-            </p>
-            <p className="text-muted-foreground text-sm">
-              Premium Fitness in Handewadi, Pune
-            </p>
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <h3 className="font-bold text-lg mb-4">SS Fitness</h3>
+              <p className="text-muted-foreground text-sm">Premium fitness center in Handewadi dedicated to your transformation.</p>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Quick Links</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><a href="#services" className="hover:text-accent transition">Services</a></li>
+                <li><a href="#transformation" className="hover:text-accent transition">Transformations</a></li>
+                <li><a href="#about" className="hover:text-accent transition">About</a></li>
+                <li><a href="#contact" className="hover:text-accent transition">Contact</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Services</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>Strength Training</li>
+                <li>Cardio & Conditioning</li>
+                <li>Personal Training</li>
+                <li>Group Classes</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Follow Us</h4>
+              <p className="text-muted-foreground text-sm">Connect with us on social media for daily fitness tips and updates.</p>
+            </div>
+          </div>
+
+          <div className="border-t border-border pt-8 text-center text-muted-foreground text-sm">
+            <p>&copy; 2024 SS Fitness. All rights reserved. | Premium Fitness Center in Handewadi</p>
           </div>
         </div>
       </footer>
