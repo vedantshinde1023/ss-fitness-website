@@ -54,22 +54,22 @@ export default function Home() {
 
   const transformations = [
     {
-      before: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-before-1-NLQvwwDTCXHNdSU4VuRfXS.webp',
-      after: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-after-1-A28iA4sp3Q3VUdjacS3Ywv.webp',
+      before: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-before-1-indian-gJvMbgd7mKerqRKBLx5UUe.webp',
+      after: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-after-1-indian-T54zSX88r7i2hty6B4nHyZ.webp',
       name: 'Rajesh Kumar',
       duration: '6 months',
       weight: '28 kg lost',
     },
     {
-      before: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-before-2-YmhmaZu9jhBuB7Cq32KCSw.webp',
-      after: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-after-2-Nh3gorFYuyBT4aasQ4e6UM.webp',
+      before: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-before-2-indian-i3FM2xMPsHYxUfRRJwUR6m.webp',
+      after: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-after-2-indian-4zqNeC7h5FtVDzaJwtrsQc.webp',
       name: 'Priya Sharma',
       duration: '5 months',
       weight: '18 kg lost',
     },
     {
-      before: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-before-3-6tZS8EGbiTHAnMCLmjL6iw.webp',
-      after: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-after-3-NxpqMKQjpDKaTD7976kgzY.webp',
+      before: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-before-3-indian-GY9QBU8fuZFsPx2fARpS4g.webp',
+      after: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-after-3-indian-kaJTZsxAqZ5pj2dCXjFYiG.webp',
       name: 'Arjun Patel',
       duration: '4 months',
       weight: '12 kg gained (muscle)',
