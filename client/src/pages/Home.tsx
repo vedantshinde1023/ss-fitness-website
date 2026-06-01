@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Header from '@/components/Header';
-import BeforeAfterSlider from '@/components/BeforeAfterSlider';
-import { MapPin, Clock, Phone, Mail, Dumbbell, Users, Zap, Award } from 'lucide-react';
+import { MapPin, Clock, Phone, Mail, Dumbbell, Users, Zap, Award, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -50,6 +49,30 @@ export default function Home() {
       title: 'Group Classes',
       description: 'Yoga, Zumba, and other group fitness classes for all levels',
       image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/group-classes-service-Qx8zR2V9evxkJzCmZLuQvp.webp',
+    },
+  ];
+
+  const transformations = [
+    {
+      before: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-before-1-NLQvwwDTCXHNdSU4VuRfXS.webp',
+      after: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-after-1-A28iA4sp3Q3VUdjacS3Ywv.webp',
+      name: 'Rajesh Kumar',
+      duration: '6 months',
+      weight: '28 kg lost',
+    },
+    {
+      before: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-before-2-YmhmaZu9jhBuB7Cq32KCSw.webp',
+      after: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-after-2-Nh3gorFYuyBT4aasQ4e6UM.webp',
+      name: 'Priya Sharma',
+      duration: '5 months',
+      weight: '18 kg lost',
+    },
+    {
+      before: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-before-3-6tZS8EGbiTHAnMCLmjL6iw.webp',
+      after: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-after-3-NxpqMKQjpDKaTD7976kgzY.webp',
+      name: 'Arjun Patel',
+      duration: '4 months',
+      weight: '12 kg gained (muscle)',
     },
   ];
 
@@ -150,26 +173,85 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Transformation Section */}
-      <section id="transformation" className="section-spacing">
+      {/* Transformation Section - Premium Grid Layout */}
+      <section id="transformation" className="section-spacing relative">
         <div className="container">
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
             <div className="flex justify-center mb-4">
               <div className="divider-gold"></div>
             </div>
             <h2 className="h2 mb-4">Real Transformations</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Drag the slider to see the incredible before and after results from our members
+              Inspiring before and after results from our dedicated members
             </p>
           </div>
 
-          <div className="flex justify-center">
-            <BeforeAfterSlider
-              beforeImage="https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-before-overweight-juEeXAfCizjG8nVFEW399L.webp"
-              afterImage="https://d2xsxph8kpxj0f.cloudfront.net/310519663554181221/PRJv46fnXuJZ7dsCcY5qhK/transformation-before-fit-man-PS6CUBwcoh5ZYESoKfvvZ7.webp"
-              beforeLabel="Before"
-              afterLabel="After"
-            />
+          <div className="grid md:grid-cols-3 gap-8">
+            {transformations.map((transformation, idx) => (
+              <div
+                key={idx}
+                className="group bg-card rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+              >
+                {/* Before/After Images Container */}
+                <div className="relative h-96 overflow-hidden bg-secondary/50">
+                  {/* Before Image */}
+                  <div className="absolute inset-0 w-1/2 h-full overflow-hidden">
+                    <img
+                      src={transformation.before}
+                      alt="Before"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-4 left-4 bg-accent/90 text-background px-3 py-1 rounded-full text-xs font-bold">
+                      BEFORE
+                    </div>
+                  </div>
+
+                  {/* After Image */}
+                  <div className="absolute inset-0 w-1/2 h-full right-0 overflow-hidden">
+                    <img
+                      src={transformation.after}
+                      alt="After"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-4 right-4 bg-accent/90 text-background px-3 py-1 rounded-full text-xs font-bold">
+                      AFTER
+                    </div>
+                  </div>
+
+                  {/* Center Divider */}
+                  <div className="absolute inset-y-0 left-1/2 w-1 bg-accent/50 group-hover:bg-accent transition-colors duration-300"></div>
+                </div>
+
+                {/* Info Section */}
+                <div className="p-6 text-center">
+                  <h3 style={{ fontFamily: '"Playfair Display", serif', fontWeight: 700 }} className="text-xl mb-2">
+                    {transformation.name}
+                  </h3>
+                  <div className="flex justify-center gap-4 text-sm">
+                    <div>
+                      <p className="text-accent font-semibold">{transformation.duration}</p>
+                      <p className="text-muted-foreground text-xs">Duration</p>
+                    </div>
+                    <div className="w-px bg-border"></div>
+                    <div>
+                      <p className="text-accent font-semibold">{transformation.weight}</p>
+                      <p className="text-muted-foreground text-xs">Result</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Call to Action */}
+          <div className="text-center mt-16">
+            <p className="text-muted-foreground mb-4">Ready to start your transformation journey?</p>
+            <button
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="inline-flex items-center gap-2 btn-primary"
+            >
+              Join SS Fitness Today <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </section>
@@ -222,7 +304,7 @@ export default function Home() {
             ].map((testimonial, idx) => (
               <div
                 key={idx}
-                className="p-8 bg-card rounded-lg hover:shadow-lg transition-all duration-300 animate-slide-in-left"
+                className="p-8 bg-card rounded-lg hover:shadow-lg transition-all duration-300 animate-slide-in-left border border-border/50"
                 style={{ animationDelay: `${idx * 100}ms` }}
               >
                 <div className="flex gap-1 mb-4">
